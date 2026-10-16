@@ -1,0 +1,27 @@
+name: gitleaks
+
+# Server-side secret scan. Runs on GitHub for every push and pull request,
+# so it catches anything that slips past the local pre-commit hook
+# (a --no-verify commit, a different machine, a teammate, a fresh clone).
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # No GITLEAKS_LICENSE needed: that is only required for
+          # organization-owned repos, not personal accounts.

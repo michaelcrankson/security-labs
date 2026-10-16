@@ -1,0 +1,8 @@
+# Built locally from the dataset; never committed.
+*.db
+.DS_Store
+__pycache__/
+.env*
+
+# The raw log is downloaded from Loghub (see each lab README), not redistributed here.
+*/data/*.log
