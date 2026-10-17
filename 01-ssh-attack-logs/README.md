@@ -91,8 +91,9 @@ What would have stopped this:
   effectively a detection rule.
 
 ## What I learned
-- `LIMIT` on raw rows shows the *first* rows, not the *top* ones. Count first, then sort.
-- Text values in SQL need exact spelling and single quotes. When a query returns nothing,
-  check the real values with `SELECT DISTINCT`.
-- Grouping by two columns (IP and minute) turns "how much" into "how fast".
-- Not every alert is an attack, but you verify before you dismiss it.
+- **Volume and speed tell different stories.** Totals showed who attacked most; counting
+  per minute showed it was automated, up to 30 guesses a minute.
+- **Every alert gets verified.** The one successful login looked legitimate, but a stolen
+  password would look exactly the same, so it needs confirming before it is dismissed.
+- **Prevention beats detection.** Turning off root login alone would have made 71% of this
+  attack pointless.
